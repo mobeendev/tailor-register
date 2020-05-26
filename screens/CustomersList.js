@@ -8,7 +8,9 @@ import {
 import { Searchbar, Button ,FAB} from "react-native-paper";
 import SafeAreaView from "react-native-safe-area-view";
 import Icon from "react-native-vector-icons/Ionicons";
+import CustomerListItem from  './CustomerListItem'
 import Constants from 'expo-constants';
+
 const statusBarHeight = Constants.statusBarHeight
 
 const CustomersList = () => {
@@ -25,6 +27,15 @@ const CustomersList = () => {
           >
             Search
           </Button>
+
+        <CustomerListItem/>
+        <CustomerListItem/>
+        <CustomerListItem/>
+        <CustomerListItem/>
+        <CustomerListItem/>
+        <CustomerListItem/>
+
+
           <FAB
             style={styles.fab}
             medium
