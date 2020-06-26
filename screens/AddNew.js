@@ -20,6 +20,7 @@ import {
 import { Entypo } from "@expo/vector-icons";
 import Constants from "expo-constants";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
+import SegmentedControlTab from "react-native-segmented-control-tab";
 
 import * as SQLite from "expo-sqlite";
 const db = SQLite.openDatabase("db.testDb1"); // returns Database object
@@ -45,7 +46,7 @@ class AddNew extends React.Component {
       hips: null,
 
       collar_size: null,
-      collar_type: false,
+      collar_type: 0,
       shirt_style: null,
       arm_hole: null,
     };
@@ -55,6 +56,9 @@ class AddNew extends React.Component {
         "CREATE TABLE IF NOT EXISTS itemsa (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT,lastname TEXT, contact INT,chest INT, waist INT,shoulder INT, arm INT, trouser_length INT, hips INT, collar_size INT,collar_type INT,shirt_style INT,arm_hole INT)"
       );
     });
+  }
+  componentDidUpdate() {
+    console.log(this.state.collar_type);
   }
   // event handler for new item creation
   newItem = () => {
@@ -91,7 +95,12 @@ class AddNew extends React.Component {
     });
     this.props.navigation.navigate("Tabs");
   };
-
+  handleIndexChange = (index) => {
+    this.setState({
+      ...this.state,
+      collar_type: index,
+    });
+  };
   // _onToggleSwitch = () =>
   //   this.setState((state) => ({ isSwitchOn: !state.isSwitchOn }));
 
@@ -175,18 +184,26 @@ class AddNew extends React.Component {
               value={this.state.collar_size}
               onChangeText={(collar_size) => this.setState({ collar_size })}
             />
-            <Text>Style : </Text>
-            <Text>Ban</Text>
-
-            <RadioButton
-              value="first"
-              status={checked === "Ban" ? "checked" : "unchecked"}
-              onPress={() => this.setState({ collar_type: "1" })}
-            />
-            <RadioButton
-              value="second"
-              status={checked === "Normal" ? "checked" : "unchecked"}
-              onPress={() => this.setState({ collar_type: "0" })}
+          </View>
+          <View style={styles.formRow}>
+            <SegmentedControlTab
+              values={["Ban", "Round", "Normal"]}
+              selectedIndex={this.state.collar_type}
+              onTabPress={this.handleIndexChange}
+              borderRadius={0}
+              tabsContainerStyle={{
+                height: 30,
+                width: "100%",
+                backgroundColor: "#F2F2F2",
+              }}
+              tabStyle={{
+                backgroundColor: "#F2F2F2",
+                borderWidth: 1,
+                borderColor: "transparent",
+              }}
+              activeTabStyle={{ backgroundColor: "white", marginTop: 2 }}
+              tabTextStyle={{ color: "black", fontWeight: "bold" }}
+              activeTabTextStyle={{ color: "black" }}
             />
           </View>
           <View style={styles.formRow}>

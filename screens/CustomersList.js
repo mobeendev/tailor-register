@@ -14,13 +14,15 @@ import SafeAreaView from "react-native-safe-area-view";
 import Icon from "react-native-vector-icons/Ionicons";
 import CustomerListItem from "./CustomerListItem";
 import Constants from "expo-constants";
-import { withNavigation } from "react-navigation";
-import { AppLoading } from "expo";
+
 import * as SQLite from "expo-sqlite";
 const db = SQLite.openDatabase("db.testDb1"); // returns Database object
 
 const statusBarHeight = Constants.statusBarHeight;
-
+var radio_props = [
+  { label: "Ban", value: 0 },
+  { label: "Normal", value: 1 },
+];
 class CustomersList extends React.Component {
   constructor(props) {
     super(props);
@@ -31,17 +33,13 @@ class CustomersList extends React.Component {
       lastname: null,
       name: null,
       isloaded: false,
+      collar_type: 0,
     };
     // Check if the items table exists if not create it
     db.transaction((tx) => {
       tx.executeSql(
         //        "DROP TABLE itemsa;CREATE TABLE IF NOT EXISTS itemsa (id INTEGER PRIMARY KEY AUTOINCREMENT, text TEXT, count INT,name TEXT, firstname TEXT,lastname TEXT,collar_size  INT,is_ban INT,shirt_style INT)"
-        `CREATE TABLE IF NOT EXISTS itemsa (id INTEGER PRIMARY KEY AUTOINCREMENT, 
-  firstname TEXT,lastname TEXT,
-  contact INT,
-  chest INT, waist INT,shoulder INT,
-  arm INT, trouser_length INT, hips INT, 
-  collar_size INT,collar_type INT,shirt_style INT,arm_hole INT)`
+        "CREATE TABLE IF NOT EXISTS itemsa (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT,lastname TEXT, contact INT,chest INT, waist INT,shoulder INT, arm INT, trouser_length INT, hips INT, collar_size INT,collar_type INT,shirt_style INT,arm_hole INT)"
       );
     });
     this.fetchData(); // ignore it for now
@@ -55,7 +53,9 @@ class CustomersList extends React.Component {
     }
     console.log(this.state.data);
   }
-
+  componentDidUpdate() {
+    console.log(this.state.collar_type);
+  }
   fetchData = () => {
     db.transaction((tx) => {
       // sending 4 arguments in executeSql
@@ -73,6 +73,13 @@ class CustomersList extends React.Component {
   renderMenuItem = ({ item, index }) => {
     return <CustomerListItem item={item} />;
   };
+
+  handleIndexChange = (index) => {
+    this.setState({
+      ...this.state,
+      collar_type: index,
+    });
+  };
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
@@ -89,6 +96,7 @@ class CustomersList extends React.Component {
             >
               Search
             </Button>
+
             {this.state.data !== null ? (
               <FlatList
                 data={this.state.data}
