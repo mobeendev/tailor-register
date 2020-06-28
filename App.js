@@ -1,6 +1,6 @@
 import React from "react";
 import { enableScreens } from "react-native-screens";
-import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 
 import AppNavigator from "./navigation/AppNavigator";
 import { SafeAreaProvider } from "react-native-safe-area-context";

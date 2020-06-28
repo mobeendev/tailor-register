@@ -8,6 +8,7 @@ import {
   Text,
   Subheading,
   RadioButton,
+  FAB,
 } from "react-native-paper";
 import {
   StyleSheet,
@@ -21,7 +22,7 @@ import { Entypo } from "@expo/vector-icons";
 import Constants from "expo-constants";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 import SegmentedControlTab from "react-native-segmented-control-tab";
-
+import { AntDesign } from "@expo/vector-icons";
 import * as SQLite from "expo-sqlite";
 const db = SQLite.openDatabase("db.testDb1"); // returns Database object
 const statusBarHeight = Constants.statusBarHeight;
@@ -192,14 +193,14 @@ class AddNew extends React.Component {
               onTabPress={this.handleIndexChange}
               borderRadius={0}
               tabsContainerStyle={{
-                height: 30,
+                height: 50,
                 width: "100%",
-                backgroundColor: "#F2F2F2",
+                backgroundColor: "orange",
               }}
               tabStyle={{
                 backgroundColor: "#F2F2F2",
                 borderWidth: 1,
-                borderColor: "transparent",
+                borderColor: "#9c9c9c",
               }}
               activeTabStyle={{ backgroundColor: "white", marginTop: 2 }}
               tabTextStyle={{ color: "black", fontWeight: "bold" }}
@@ -225,13 +226,17 @@ class AddNew extends React.Component {
             <Button
               icon="person"
               mode="contained"
+              style={{ width: "100%", height: 50, justifyContent: "center" }}
               onPress={() => this.newItem()}
             >
               Save
             </Button>
+          </View>
+          <View style={styles.formRow}>
             <Button
-              icon="cancel"
+              icon="arrow-back"
               mode="contained"
+              style={{ width: "100%", height: 50, justifyContent: "center" }}
               onPress={() => this.props.navigation.navigate("Tabs")}
             >
               Back
