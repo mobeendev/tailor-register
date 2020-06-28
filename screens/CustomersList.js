@@ -14,6 +14,7 @@ import SafeAreaView from "react-native-safe-area-view";
 import Icon from "react-native-vector-icons/Ionicons";
 import CustomerListItem from "./CustomerListItem";
 import Constants from "expo-constants";
+import { GlobalContext } from "../GlobalState";
 
 import * as SQLite from "expo-sqlite";
 const db = SQLite.openDatabase("db.testDb1"); // returns Database object

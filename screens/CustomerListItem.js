@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
 import { List, Colors } from "react-native-paper";
+import { CustomerDataContext } from "../context/CustomerData";
 
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 const CustomerListItem = ({ item }) => {
-  const onPress = () => console.log(item);
+  const Customercontext = useContext(CustomerDataContext);
+
+  const onPress = (e) => {
+    console.log(Customercontext);
+  };
 
   return (
     <TouchableOpacity style={{ marginBottom: 15 }} onPress={onPress}>
