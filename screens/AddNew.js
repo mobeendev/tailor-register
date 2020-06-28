@@ -229,6 +229,13 @@ class AddNew extends React.Component {
             >
               Save
             </Button>
+            <Button
+              icon="cancel"
+              mode="contained"
+              onPress={() => this.props.navigation.navigate("Tabs")}
+            >
+              Back
+            </Button>
           </View>
         </View>
       </KeyboardAwareScrollView>

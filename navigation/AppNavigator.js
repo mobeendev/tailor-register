@@ -1,6 +1,6 @@
 import React from "react";
 import { Platform, Text } from "react-native";
-import { createSwitchNavigator,createAppContainer } from "react-navigation";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { MaterialCommunityIcons, Entypo } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import CustomersList from "../screens/CustomersList";
@@ -49,33 +49,13 @@ const TabNavigator = createBottomTabNavigator(tabScreenConfig, {
 
 const AppNavigator = createSwitchNavigator({
   Tabs: TabNavigator,
-  AddNew: createStackNavigator({
-    AddNew: {
-      screen: AddNew,
-    }
-  },{}),
+  AddNew: createStackNavigator(
+    {
+      AddNew: {
+        screen: AddNew,
+      },
+    },
+    {}
+  ),
 });
-
-const AppNavigatorq = createStackNavigator(
-  {
-    Tabs: {
-      screen: TabNavigator,
-    },
-    AddNew: {
-      screen: AddNew,
-    },
-  },
-  {
-    // header: null,
-    headerMode: "screen",
-    defaultNavigationOptions: ({ navigation }) => {
-      const { routeName } = navigation.state.routes[navigation.state.index];
-      const navRoute = routeName,
-        route = navRoute && navRoute.routeName && Routes[navRoute.routeName],
-        title = route ? route.title : navRoute;
-      return { title };
-    },
-  }
-);
-
 export default createAppContainer(AppNavigator);
