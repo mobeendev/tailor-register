@@ -96,7 +96,6 @@ class CustomersList extends React.Component {
             >
               Search
             </Button>
-
             {this.state.data !== null ? (
               <FlatList
                 data={this.state.data}
