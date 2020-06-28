@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import AppReducer from "../AppReducer";
+import CustomerReducer from "../reducer/CustomersReducer";
 
 const initialState = {
   customers: [
@@ -24,7 +24,7 @@ const initialState = {
 export const CustomerDataContext = React.createContext(initialState);
 
 export const CustomerDataProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(AppReducer, initialState);
+  const [state, dispatch] = useReducer(CustomerReducer, initialState);
 
   return (
     <CustomerDataContext.Provider value={initialState}>
