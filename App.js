@@ -4,6 +4,8 @@ import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 
 import AppNavigator from "./navigation/AppNavigator";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { GlobalProvider } from "./GlobalState";
+import CustomerDataProvider from "./context/CustomerData";
 
 enableScreens();
 
@@ -17,10 +19,14 @@ const theme = {
 };
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <PaperProvider theme={theme}>
-        <AppNavigator />
-      </PaperProvider>
-    </SafeAreaProvider>
+    <GlobalProvider>
+      <CustomerDataProvider>
+        <SafeAreaProvider>
+          <PaperProvider theme={theme}>
+            <AppNavigator />
+          </PaperProvider>
+        </SafeAreaProvider>
+      </CustomerDataProvider>
+    </GlobalProvider>
   );
 }
