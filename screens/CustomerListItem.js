@@ -10,7 +10,7 @@ const CustomerListItem = ({ item }) => {
   const Customercontext = useContext(CustomerDataContext);
 
   const onPress = (e) => {
-    console.log(Customercontext);
+    console.log("log", Customercontext);
   };
 
   return (
