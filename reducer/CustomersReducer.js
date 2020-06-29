@@ -6,6 +6,21 @@ export default (state, action) => {
 
     case "EDIT_CUSTOMER":
 
+    case "SET_CUSTOMER":
+      console.log("updating state with...", action.payload);
+
+      if (action.payload) {
+        return {
+          ...state,
+          customers: action.payload,
+        };
+      } else {
+        return {
+          ...state,
+          customers: null,
+        };
+      }
+
     default:
       return state;
   }

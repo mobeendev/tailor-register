@@ -2,32 +2,27 @@ import React, { useReducer } from "react";
 import CustomerReducer from "../reducer/CustomersReducer";
 
 const initialState = {
-  customers: [
-    {
-      id: 9999,
-      firstname: "Abdul",
-      lastname: "Mobeen",
-      chest: 77,
-      collar_size: 34,
-      collar_type: 1,
-      arm: 7,
-      arm_hole: 34,
-      contact: 97987987,
-      shirt_style: 34,
-      shoulder: 88,
-      trouser_length: 7,
-      waist: 88,
-    },
-  ],
+  customers: null,
 };
 
-export const CustomerDataContext = React.createContext(initialState);
+export const CustomerDataContext = React.createContext(444);
 
 export const CustomerDataProvider = ({ children }) => {
   const [state, dispatch] = useReducer(CustomerReducer, initialState);
 
+  function initCustomersList(customers) {
+    console.log("passed data", customers);
+
+    dispatch({
+      type: "SET_CUSTOMER",
+      payload: customers,
+    });
+  }
+
   return (
-    <CustomerDataContext.Provider value={initialState}>
+    <CustomerDataContext.Provider
+      value={{ customers: state.customers, initCustomersList }}
+    >
       {children}
     </CustomerDataContext.Provider>
   );
