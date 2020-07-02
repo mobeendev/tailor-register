@@ -3,10 +3,11 @@ import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
 import { List, Colors } from "react-native-paper";
 import { CustomerDataContext } from "../context/CustomerData";
+import { withNavigation } from "react-navigation";
 
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
-const CustomerListItem = ({ item }) => {
+const CustomerListItem = ({ item, navigation }) => {
   const Customercontext = useContext(CustomerDataContext);
 
   const onPress = (e) => {
@@ -14,7 +15,15 @@ const CustomerListItem = ({ item }) => {
   };
 
   return (
-    <TouchableOpacity style={{ marginBottom: 15 }} onPress={onPress}>
+    <TouchableOpacity
+      style={{ marginBottom: 15 }}
+      onPress={() => {
+        navigation.navigate("Customer", {
+          itemId: 86,
+          otherParam: "anything you want here",
+        });
+      }}
+    >
       <Card>
         <View
           style={{
@@ -62,6 +71,6 @@ const CustomerListItem = ({ item }) => {
   );
 };
 
-export default CustomerListItem;
+export default withNavigation(CustomerListItem);
 
 const styles = StyleSheet.create({});
