@@ -4,6 +4,7 @@ import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { MaterialCommunityIcons, Entypo } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import CustomersList from "../screens/CustomersList";
+import CustomerDetail from "../screens/CustomerDetail";
 import AddNew from "../screens/AddNew";
 import Orders from "../screens/Orders";
 import Colors from "../constants/Colors";
@@ -47,8 +48,18 @@ const TabNavigator = createBottomTabNavigator(tabScreenConfig, {
   },
 });
 
+const CustomerStack = createStackNavigator(
+  {
+    Detail: CustomerDetail,
+  },
+  {
+    navigationOptions: {},
+  }
+);
+
 const AppNavigator = createSwitchNavigator({
   Tabs: TabNavigator,
+  Customer: CustomerStack,
   AddNew: createStackNavigator(
     {
       AddNew: {
