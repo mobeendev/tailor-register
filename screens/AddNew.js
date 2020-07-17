@@ -10,6 +10,8 @@ import {
   RadioButton,
   FAB,
 } from "react-native-paper";
+import { withTheme } from "react-native-paper";
+
 import {
   StyleSheet,
   TouchableWithoutFeedback,
@@ -115,12 +117,14 @@ class AddNew extends React.Component {
             <TextInput
               style={styles.formLabel}
               label="First Name"
+              mode="outlined"
               value={this.state.firstname}
               onChangeText={(firstname) => this.setState({ firstname })}
             />
             <TextInput
               style={styles.formLabel}
               label="Last Name"
+              mode="outlined"
               value={this.state.lastname}
               onChangeText={(lastname) => this.setState({ lastname })}
             />
@@ -130,75 +134,102 @@ class AddNew extends React.Component {
             <TextInput
               style={styles.formLabel}
               label="Phone No."
+              mode="outlined"
               onChangeText={(contact) => this.setState({ contact })}
             />
           </View>
 
           <Subheading>Measurement</Subheading>
+
+          <Divider />
+          <Subheading
+            style={{ alignSelf: "center", color: "#3498db", fontWeight: "800" }}
+          >
+            Shirt Style
+          </Subheading>
           <Divider />
 
           <View style={styles.formRow}>
             <TextInput
               style={styles.formLabel}
-              label="Chest"
-              value={this.state.chest}
-              onChangeText={(chest) => this.setState({ chest })}
-            />
-            <TextInput
-              style={styles.formLabel}
-              label="Waist"
+              mode="outlined"
+              label="شولڈر"
               onChangeText={(waist) => this.setState({ waist })}
             />
             <TextInput
               style={styles.formLabel}
-              label="Shoulder"
-              value={this.state.shoulder}
-              onChangeText={(shoulder) => this.setState({ shoulder })}
+              label="شرٹ لمبائي"
+              mode="outlined"
+              value={this.state.chest}
+              onChangeText={(chest) => this.setState({ chest })}
             />
           </View>
           <View style={styles.formRow}>
             <TextInput
               style={styles.formLabel}
-              label="Arm"
+              mode="outlined"
+              label="تیرہ"
+              value={this.state.shoulder}
+              onChangeText={(shoulder) => this.setState({ shoulder })}
+            />
+            <TextInput
+              style={styles.formLabel}
+              mode="outlined"
+              label="بازو"
               value={this.state.arm}
               onChangeText={(arm) => this.setState({ arm })}
-            />
-            <TextInput
-              style={styles.formLabel}
-              label="Trouser"
-              onChangeText={(trouser_length) =>
-                this.setState({ trouser_length })
-              }
-            />
-            <TextInput
-              style={styles.formLabel}
-              label="Hips"
-              value={this.state.hips}
-              onChangeText={(hips) => this.setState({ hips })}
             />
           </View>
 
           <View style={styles.formRow}>
             <TextInput
-              style={styles.formLabel}
-              label="Collar Size"
+              style={styles.formLabeli}
+              label="کالر"
+              mode="outlined"
               value={this.state.collar_size}
               onChangeText={(collar_size) => this.setState({ collar_size })}
             />
-          </View>
-          <View style={styles.formRow}>
             <SegmentedControlTab
-              values={["Ban", "Round", "Normal"]}
+              values={["سادہ", "بین", "گول"]}
               selectedIndex={this.state.collar_type}
               onTabPress={this.handleIndexChange}
               borderRadius={0}
               tabsContainerStyle={{
                 height: 50,
-                width: "100%",
-                backgroundColor: "orange",
+                width: "70%",
+                backgroundColor: "#3498db",
               }}
               tabStyle={{
-                backgroundColor: "#F2F2F2",
+                backgroundColor: "#f1c40f",
+                borderWidth: 1,
+                borderColor: "#9c9c9c",
+              }}
+              activeTabStyle={{ backgroundColor: "white", marginTop: 2 }}
+              tabTextStyle={{ color: "black", fontWeight: "bold" }}
+              activeTabTextStyle={{ color: "black" }}
+            />
+          </View>
+          <View style={styles.formRow}>
+            <TextInput
+              style={styles.formLabeli}
+              label="پاکٹ"
+              mode="outlined"
+              disabled
+              value={this.state.collar_size}
+              onChangeText={(collar_size) => this.setState({ collar_size })}
+            />
+            <SegmentedControlTab
+              values={["ڈبل سائیڈ", "سنگل سائیڈ"]}
+              selectedIndex={this.state.collar_type}
+              onTabPress={this.handleIndexChange}
+              borderRadius={0}
+              tabsContainerStyle={{
+                height: 49,
+                width: "70%",
+                backgroundColor: "#3498db",
+              }}
+              tabStyle={{
+                backgroundColor: "#f1c40f",
                 borderWidth: 1,
                 borderColor: "#9c9c9c",
               }}
@@ -210,18 +241,76 @@ class AddNew extends React.Component {
           <View style={styles.formRow}>
             <TextInput
               style={styles.formLabel}
-              label="Shirt Style"
+              label="گھیرا لمبائي"
+              mode="outlined"
+              value={this.state.collar_size}
+              onChangeText={(collar_size) => this.setState({ collar_size })}
+            />
+          </View>
+          <View style={styles.formRow}>
+            <SegmentedControlTab
+              values={["سادہ", "گول", "نارمل"]}
+              selectedIndex={this.state.collar_type}
+              onTabPress={this.handleIndexChange}
+              borderRadius={0}
+              tabsContainerStyle={{
+                height: 50,
+                width: "100%",
+                backgroundColor: "#3498db",
+              }}
+              tabStyle={{
+                backgroundColor: "#f1c40f",
+                borderWidth: 1,
+                borderColor: "#9c9c9c",
+              }}
+              activeTabStyle={{ backgroundColor: "white", marginTop: 2 }}
+              tabTextStyle={{ color: "black", fontWeight: "bold" }}
+              activeTabTextStyle={{ color: "black" }}
+            />
+          </View>
+          <Divider />
+          <Subheading
+            style={{ alignSelf: "center", color: "#3498db", fontWeight: "800" }}
+          >
+            Trouser Style
+          </Subheading>
+          <Divider />
+
+          <View style={styles.formRow}>
+            <TextInput
+              style={styles.formLabel}
+              label="لمبائي"
+              mode="outlined"
               value={this.state.shirt_style}
               onChangeText={(shirt_style) => this.setState({ shirt_style })}
             />
             <TextInput
               style={styles.formLabel}
-              label="Arm Hole"
+              mode="outlined"
+              label="پا نچا"
               value={this.state.arm_hole}
               onChangeText={(arm_hole) => this.setState({ arm_hole })}
             />
           </View>
 
+          <Divider />
+          <Subheading
+            style={{ alignSelf: "center", color: "#3498db", fontWeight: "800" }}
+          >
+            مزید معلومات
+          </Subheading>
+          <Divider />
+
+          <View style={styles.formRow}>
+            <TextInput
+              style={{ height: 100, flex: 1 }}
+              label="مزید معلومات یہاں درج کریں۔۔۔"
+              mode="outlined"
+              multiline={true}
+              value={this.state.shirt_style}
+              onChangeText={(shirt_style) => this.setState({ shirt_style })}
+            />
+          </View>
           <View style={styles.formRow}>
             <Button
               icon="person"
@@ -236,18 +325,23 @@ class AddNew extends React.Component {
             <Button
               icon="arrow-back"
               mode="contained"
+              raised
+              theme={{ roundness: 3 }}
               style={{ width: "100%", height: 50, justifyContent: "center" }}
               onPress={() => this.props.navigation.navigate("Tabs")}
             >
               Back
             </Button>
+            {/* <Button raised theme={{ roundness: 3 }}>
+              Press me
+            </Button> */}
           </View>
         </View>
       </KeyboardAwareScrollView>
     );
   }
 }
-export default AddNew;
+export default withTheme(AddNew);
 
 const styles = StyleSheet.create({
   fab: {
@@ -273,6 +367,14 @@ const styles = StyleSheet.create({
   formLabel: {
     flex: 2,
     margin: 2,
+  },
+  formLabeli: {
+    flex: 1,
+    alignSelf: "flex-start",
+    height: 55,
+    marginBottom: 4,
+    marginHorizontal: 2,
+    paddingBottom: 4,
   },
   formItem: {
     flex: 1,
