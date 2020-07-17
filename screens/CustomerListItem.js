@@ -18,8 +18,8 @@ const CustomerListItem = ({ item, navigation }) => {
     <TouchableOpacity
       style={{ marginBottom: 15 }}
       onPress={() => {
-        navigation.navigate("Customer", {
-          itemId: 86,
+        navigation.navigate("Detail", {
+          customerInfo: item,
           otherParam: "anything you want here",
         });
       }}
