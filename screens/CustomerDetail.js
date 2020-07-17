@@ -1,37 +1,26 @@
 import React, { useContext } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { CustomerDataContext } from "../context/CustomerData";
-import { Entypo } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
-import {
-  Avatar,
-  DataTable,
-  Button,
-  Card,
-  List,
-  BottomNavigation,
-  Text,
-  Title,
-  Paragraph,
-} from "react-native-paper";
+import { Avatar, DataTable, Button, Card, List } from "react-native-paper";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="person" />;
 
 const CustomerDetail = ({ navigation }) => {
-  console.log(navigation);
   const [expanded, setExpanded] = React.useState(true);
+
+  const customer = navigation.getParam("customerInfo");
+
+  console.log(customer);
 
   const handlePress = () => setExpanded(!expanded);
 
   return (
     <Card>
       <Card.Title
-        title="Card Title"
-        subtitle="Card Subtitle"
+        title={customer.firstname + " " + customer.lastname}
+        subtitle={"cust@-" + customer.id}
         left={LeftContent}
       />
       <Card.Content>
-        <Paragraph>Measure Information</Paragraph>
-
         <DataTable
           style={{
             justifyContent: "space-around",
@@ -41,7 +30,8 @@ const CustomerDetail = ({ navigation }) => {
             style={{
               justifyContent: "space-between",
               alignContent: "center",
-              backgroundColor: "gray",
+              backgroundColor: "",
+              size: 44,
             }}
           >
             <DataTable.Title size="33">Measurement</DataTable.Title>
@@ -49,28 +39,30 @@ const CustomerDetail = ({ navigation }) => {
           </DataTable.Header>
 
           <DataTable.Row>
-            <DataTable.Cell>Shoulder</DataTable.Cell>
-            <DataTable.Cell>159</DataTable.Cell>
+            <DataTable.Cell>Chest</DataTable.Cell>
+            <DataTable.Cell>{customer.contact}</DataTable.Cell>
           </DataTable.Row>
           <DataTable.Row>
-            <DataTable.Cell>Arm Length</DataTable.Cell>
-            <DataTable.Cell>129</DataTable.Cell>
+            <DataTable.Cell>Shoulder</DataTable.Cell>
+            <DataTable.Cell>{customer.arm}</DataTable.Cell>
           </DataTable.Row>
           <DataTable.Row>
             <DataTable.Cell>Leg</DataTable.Cell>
-            <DataTable.Cell>159</DataTable.Cell>
+            <DataTable.Cell>{customer.collar_size}</DataTable.Cell>
           </DataTable.Row>
           <DataTable.Row>
-            <DataTable.Cell>Collar</DataTable.Cell>
-            <DataTable.Cell>Ban</DataTable.Cell>
+            <DataTable.Cell>Collar Type</DataTable.Cell>
+            <DataTable.Cell>
+              {customer.collar_type ? "Normal" : "Ban"}
+            </DataTable.Cell>
           </DataTable.Row>
           <DataTable.Row>
-            <DataTable.Cell>Collar</DataTable.Cell>
-            <DataTable.Cell>Ban</DataTable.Cell>
+            <DataTable.Cell>Trouser</DataTable.Cell>
+            <DataTable.Cell>{customer.trouser_length}</DataTable.Cell>
           </DataTable.Row>
           <DataTable.Row>
-            <DataTable.Cell>Collar</DataTable.Cell>
-            <DataTable.Cell>Ban</DataTable.Cell>
+            <DataTable.Cell>Waist</DataTable.Cell>
+            <DataTable.Cell>{customer.waist}</DataTable.Cell>
           </DataTable.Row>
         </DataTable>
         <List.Accordion
@@ -90,7 +82,7 @@ const CustomerDetail = ({ navigation }) => {
           }}
         >
           <Button
-            color="orange"
+            color="red"
             icon="delete"
             mode="outlined"
             onPress={() => console.log("Pressed")}
@@ -103,7 +95,7 @@ const CustomerDetail = ({ navigation }) => {
             mode="outlined"
             onPress={() => console.log("Pressed")}
           >
-            Send to Orders
+            Add to Orders
           </Button>
         </View>
       </Card.Actions>
@@ -124,16 +116,16 @@ CustomerDetail.navigationOptions = ({ navigation }) => {
         />
       </TouchableOpacity>
     ),
-    headerLeft: () => (
-      <TouchableOpacity>
-        <Entypo
-          name="home"
-          size={30}
-          color="black"
-          onPress={() => navigation.navigate("Tabs")}
-        />
-      </TouchableOpacity>
-    ),
+    // headerLeft: () => (
+    //   <TouchableOpacity>
+    //     <Entypo
+    //       name="home"
+    //       size={30}
+    //       color="black"
+    //       onPress={() => navigation.navigate("Tabs")}
+    //     />
+    //   </TouchableOpacity>
+    // ),
   };
 };
 

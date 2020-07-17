@@ -10,9 +10,18 @@ import Orders from "../screens/Orders";
 import Colors from "../constants/Colors";
 import { createStackNavigator, HeaderTitle } from "react-navigation-stack";
 
+const CustomerStack = createStackNavigator(
+  {
+    Customer: CustomersList,
+    Detail: { screen: CustomerDetail },
+  },
+  {
+    navigationOptions: {},
+  }
+);
 const tabScreenConfig = {
   Customers: {
-    screen: CustomersList,
+    screen: CustomerStack,
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
         // return <Feather name="users" size={24} color="black" />
@@ -47,15 +56,6 @@ const TabNavigator = createBottomTabNavigator(tabScreenConfig, {
     activeTintColor: Colors.accentColor,
   },
 });
-
-const CustomerStack = createStackNavigator(
-  {
-    Detail: CustomerDetail,
-  },
-  {
-    navigationOptions: {},
-  }
-);
 
 const AppNavigator = createSwitchNavigator({
   Tabs: TabNavigator,
