@@ -46,7 +46,7 @@ const CustomersList = ({ item, navigation }) => {
     db.transaction((tx) => {
       // sending 4 arguments in executeSql
       tx.executeSql(
-        "SELECT * FROM itemsa",
+        "SELECT * FROM customers",
         null, // passing sql query and parameters:null
         // success callback which sends two things Transaction object and ResultSet Object
         (txObj, { rows: { _array } }) => {
