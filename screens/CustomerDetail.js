@@ -39,38 +39,55 @@ const CustomerDetail = ({ navigation }) => {
           </DataTable.Header>
 
           <DataTable.Row>
-            <DataTable.Cell>Chest</DataTable.Cell>
-            <DataTable.Cell>{customer.contact}</DataTable.Cell>
+            <DataTable.Cell>شرٹ لمبائي</DataTable.Cell>
+            <DataTable.Cell>{customer.shirt_length}</DataTable.Cell>
           </DataTable.Row>
           <DataTable.Row>
-            <DataTable.Cell>Shoulder</DataTable.Cell>
+            <DataTable.Cell>تیرہ</DataTable.Cell>
+            <DataTable.Cell>{customer.teerah}</DataTable.Cell>
+          </DataTable.Row>
+          <DataTable.Row>
+            <DataTable.Cell>بازو</DataTable.Cell>
             <DataTable.Cell>{customer.arm}</DataTable.Cell>
           </DataTable.Row>
           <DataTable.Row>
-            <DataTable.Cell>Leg</DataTable.Cell>
+            <DataTable.Cell>کالر</DataTable.Cell>
             <DataTable.Cell>{customer.collar_size}</DataTable.Cell>
           </DataTable.Row>
           <DataTable.Row>
-            <DataTable.Cell>Collar Type</DataTable.Cell>
+            <DataTable.Cell>کالر ڈیزائن</DataTable.Cell>
             <DataTable.Cell>
               {customer.collar_type ? "Normal" : "Ban"}
             </DataTable.Cell>
           </DataTable.Row>
           <DataTable.Row>
-            <DataTable.Cell>Trouser</DataTable.Cell>
+            <DataTable.Cell>پاکٹ</DataTable.Cell>
+            <DataTable.Cell>
+              {customer.pocket_type ? "single" : "double"}
+            </DataTable.Cell>
+          </DataTable.Row>
+          <DataTable.Row>
+            <DataTable.Cell>گھیرا لمبائي</DataTable.Cell>
+            <DataTable.Cell>{customer.shirt_bottom_length}</DataTable.Cell>
+          </DataTable.Row>
+          <DataTable.Row>
+            <DataTable.Cell> گھیرا ڈیزائن</DataTable.Cell>
+            <DataTable.Cell>{customer.shirt_bottom_type}</DataTable.Cell>
+          </DataTable.Row>
+          <DataTable.Row>
+            <DataTable.Cell> شلوار لمبائي</DataTable.Cell>
             <DataTable.Cell>{customer.trouser_length}</DataTable.Cell>
           </DataTable.Row>
           <DataTable.Row>
-            <DataTable.Cell>Waist</DataTable.Cell>
-            <DataTable.Cell>{customer.waist}</DataTable.Cell>
+            <DataTable.Cell> پا نچا </DataTable.Cell>
+            <DataTable.Cell>{customer.trouser_opening}</DataTable.Cell>
           </DataTable.Row>
         </DataTable>
         <List.Accordion
-          title="Extra Info / Comments"
+          title="  مزید معلومات "
           left={(props) => <List.Icon {...props} icon="question-answer" />}
         >
-          <List.Item title="First item" />
-          <List.Item title="Second item" />
+          <List.Item title="...." />
         </List.Accordion>
       </Card.Content>
       <Card.Actions>
