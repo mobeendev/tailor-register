@@ -40,56 +40,83 @@ class AddNew extends React.Component {
       lastname: null,
       contact: null,
 
-      chest: null,
-      waist: null,
       shoulder: null,
+      shirt_length: null,
+      teerah: null,
 
       arm: null,
-      trouser_length: null,
-      hips: null,
-
       collar_size: null,
       collar_type: 0,
-      shirt_style: null,
-      arm_hole: null,
+
+      pocket_type: 0,
+
+      shirt_bottom_length: null,
+      shirt_bottom_type: 0,
+
+      trouser_length: null,
+      trouser_opening: null,
+
+      extra_info: null,
     };
     // Check if the items table exists if not create it
     db.transaction((tx) => {
       tx.executeSql(
-        "CREATE TABLE IF NOT EXISTS itemsa (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT,lastname TEXT, contact INT,chest INT, waist INT,shoulder INT, arm INT, trouser_length INT, hips INT, collar_size INT,collar_type INT,shirt_style INT,arm_hole INT)"
+        `CREATE TABLE IF NOT EXISTS customers
+         (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT,lastname TEXT, 
+          contact INT,
+          shoulder INT, shirt_length INT,teerah INT,
+           arm INT, collar_size INT, collar_type INT,
+           pocket_type INT,
+           shirt_bottom_length INT,shirt_bottom_type INT,
+           trouser_length INT,trouser_opening INT,           
+           extra_info INT)`
       );
     });
   }
   componentDidUpdate() {
-    console.log(this.state.collar_type);
+    console.log(
+      "c ",
+      this.state.collar_type,
+      " p ",
+      this.state.pocket_type,
+      "gh",
+      this.state.shirt_bottom_type
+    );
   }
   // event handler for new item creation
   newItem = () => {
     db.transaction((tx) => {
       tx.executeSql(
-        `INSERT INTO itemsa
+        `
+        
+        INSERT INTO customers
        (firstname,lastname,contact,
-        chest,waist,shoulder,
-        arm, trouser_length , hips,
-        collar_size,collar_type ,shirt_style, arm_hole
-        ) values (?,?,?,    ?,?,?,    ?,?,?,   ?,?,?,?     )`,
+        shoulder, shirt_length,teerah,
+        arm, collar_size , collar_type,pocket_type,
+        shirt_bottom_length,shirt_bottom_type ,trouser_length, trouser_opening,extra_info
+        ) values (?,?,?,   ?,?,?,    ?,?,?,?,   ?,?,?,?,? )`,
         [
           this.state.firstname,
           this.state.lastname,
           this.state.contact,
 
-          this.state.chest,
-          this.state.waist,
           this.state.shoulder,
+          this.state.shirt_length,
+          this.state.teerah,
 
           this.state.arm,
-          this.state.trouser_length,
-          this.state.hips,
-
           this.state.collar_size,
           this.state.collar_type,
-          this.state.shirt_style,
-          this.state.arm_hole,
+
+          this.state.pocket_type,
+
+          this.state.shirt_bottom_length,
+          this.state.shirt_bottom_type,
+
+          this.state.trouser_length,
+          this.state.trouser_opening,
+
+          this.state.extra_info,
         ],
         (txObj, resultSet) => console.log("inserted"),
 
@@ -102,6 +129,18 @@ class AddNew extends React.Component {
     this.setState({
       ...this.state,
       collar_type: index,
+    });
+  };
+  handlePocketIndexChange = (index) => {
+    this.setState({
+      ...this.state,
+      pocket_type: index,
+    });
+  };
+  handleBottomIndexChange = (index) => {
+    this.setState({
+      ...this.state,
+      shirt_bottom_type: index,
     });
   };
   // _onToggleSwitch = () =>
@@ -154,14 +193,15 @@ class AddNew extends React.Component {
               style={styles.formLabel}
               mode="outlined"
               label="شولڈر"
-              onChangeText={(waist) => this.setState({ waist })}
+              value={this.state.shoulder}
+              onChangeText={(shoulder) => this.setState({ shoulder })}
             />
             <TextInput
               style={styles.formLabel}
               label="شرٹ لمبائي"
               mode="outlined"
-              value={this.state.chest}
-              onChangeText={(chest) => this.setState({ chest })}
+              value={this.state.shirt_length}
+              onChangeText={(shirt_length) => this.setState({ shirt_length })}
             />
           </View>
           <View style={styles.formRow}>
@@ -169,8 +209,8 @@ class AddNew extends React.Component {
               style={styles.formLabel}
               mode="outlined"
               label="تیرہ"
-              value={this.state.shoulder}
-              onChangeText={(shoulder) => this.setState({ shoulder })}
+              value={this.state.teerah}
+              onChangeText={(teerah) => this.setState({ teerah })}
             />
             <TextInput
               style={styles.formLabel}
@@ -215,13 +255,11 @@ class AddNew extends React.Component {
               label="پاکٹ"
               mode="outlined"
               disabled
-              value={this.state.collar_size}
-              onChangeText={(collar_size) => this.setState({ collar_size })}
             />
             <SegmentedControlTab
               values={["ڈبل سائیڈ", "سنگل سائیڈ"]}
-              selectedIndex={this.state.collar_type}
-              onTabPress={this.handleIndexChange}
+              selectedIndex={this.state.pocket_type}
+              onTabPress={this.handlePocketIndexChange}
               borderRadius={0}
               tabsContainerStyle={{
                 height: 49,
@@ -243,15 +281,17 @@ class AddNew extends React.Component {
               style={styles.formLabel}
               label="گھیرا لمبائي"
               mode="outlined"
-              value={this.state.collar_size}
-              onChangeText={(collar_size) => this.setState({ collar_size })}
+              value={this.state.shirt_bottom_length}
+              onChangeText={(shirt_bottom_length) =>
+                this.setState({ shirt_bottom_length })
+              }
             />
           </View>
           <View style={styles.formRow}>
             <SegmentedControlTab
               values={["سادہ", "گول", "نارمل"]}
-              selectedIndex={this.state.collar_type}
-              onTabPress={this.handleIndexChange}
+              selectedIndex={this.state.shirt_bottom_type}
+              onTabPress={this.handleBottomIndexChange}
               borderRadius={0}
               tabsContainerStyle={{
                 height: 50,
@@ -281,15 +321,19 @@ class AddNew extends React.Component {
               style={styles.formLabel}
               label="لمبائي"
               mode="outlined"
-              value={this.state.shirt_style}
-              onChangeText={(shirt_style) => this.setState({ shirt_style })}
+              value={this.state.trouser_length}
+              onChangeText={(trouser_length) =>
+                this.setState({ trouser_length })
+              }
             />
             <TextInput
               style={styles.formLabel}
               mode="outlined"
               label="پا نچا"
-              value={this.state.arm_hole}
-              onChangeText={(arm_hole) => this.setState({ arm_hole })}
+              value={this.state.trouser_opening}
+              onChangeText={(trouser_opening) =>
+                this.setState({ trouser_opening })
+              }
             />
           </View>
 
@@ -307,8 +351,8 @@ class AddNew extends React.Component {
               label="مزید معلومات یہاں درج کریں۔۔۔"
               mode="outlined"
               multiline={true}
-              value={this.state.shirt_style}
-              onChangeText={(shirt_style) => this.setState({ shirt_style })}
+              value={this.state.extra_info}
+              onChangeText={(extra_info) => this.setState({ extra_info })}
             />
           </View>
           <View style={styles.formRow}>
