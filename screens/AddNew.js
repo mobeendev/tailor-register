@@ -319,7 +319,7 @@ class AddNew extends React.Component {
           <View style={styles.formRow}>
             <TextInput
               style={styles.formLabel}
-              label="لمبائي"
+              label="شلوار لمبائي"
               mode="outlined"
               value={this.state.trouser_length}
               onChangeText={(trouser_length) =>
