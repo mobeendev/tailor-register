@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from "react-navigation-tabs";
 import CustomersList from "../screens/CustomersList";
 import CustomerDetail from "../screens/CustomerDetail";
 import AddNew from "../screens/AddNew";
+import UpdateCustomer from "../screens/UpdateCustomer";
 import Orders from "../screens/Orders";
 import Colors from "../constants/Colors";
 import { createStackNavigator, HeaderTitle } from "react-navigation-stack";
@@ -14,6 +15,7 @@ const CustomerStack = createStackNavigator(
   {
     Customer: CustomersList,
     Detail: { screen: CustomerDetail },
+    Update: { screen: UpdateCustomer },
   },
   {
     navigationOptions: {},

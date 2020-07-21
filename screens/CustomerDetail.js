@@ -104,6 +104,8 @@ const CustomerDetail = ({ navigation }) => {
 };
 
 CustomerDetail.navigationOptions = ({ navigation }) => {
+  const customer = navigation.getParam("customerInfo");
+
   return {
     title: "Customer Detail",
     headerRight: () => (
@@ -112,7 +114,11 @@ CustomerDetail.navigationOptions = ({ navigation }) => {
           name="edit"
           size={24}
           color="black"
-          onPress={() => navigation.navigate("Tabs")}
+          onPress={() => {
+            navigation.navigate("Update", {
+              customerInfo: customer,
+            });
+          }}
         />
       </TouchableOpacity>
     ),
