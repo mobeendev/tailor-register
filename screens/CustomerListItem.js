@@ -4,6 +4,7 @@ import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
 import { List, Colors } from "react-native-paper";
 import { CustomerDataContext } from "../context/CustomerData";
 import { withNavigation } from "react-navigation";
+import { FontAwesome } from "@expo/vector-icons";
 
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
@@ -53,7 +54,30 @@ const CustomerListItem = ({ item, navigation }) => {
                 <Title>
                   {item.firstname} {item.lastname}
                 </Title>
-                <Paragraph>{item.contact}</Paragraph>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    flex: 1,
+                  }}
+                >
+                  <View style={{ borderColor: "red", borderWidth: 0 }}>
+                    <Text> Serial: {"cust@-" + item.id}</Text>
+                  </View>
+                  <View
+                    style={{
+                      marginLeft: 10,
+                      flexDirection: "row",
+                      alignItems: "baseline",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <FontAwesome name="phone" size={14} color="black" />
+                    <Text style={{ fontSize: 15, marginLeft: 5 }}>
+                      {item.contact}
+                    </Text>
+                  </View>
+                </View>
               </Card.Content>
             </View>
           </View>
