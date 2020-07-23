@@ -36,6 +36,7 @@ class UpdateCustomer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      customerID: null,
       firstname: null,
       lastname: null,
       contact: null,
@@ -77,6 +78,7 @@ class UpdateCustomer extends React.Component {
     let customer = this.props.navigation.getParam("customerInfo");
     console.log("cdm", customer.firstname);
     this.setState({
+      customerID: customer.id,
       firstname: customer.firstname,
       lastname: customer.lastname,
       contact: customer.contact,
@@ -105,7 +107,16 @@ class UpdateCustomer extends React.Component {
     db.transaction((tx) => {
       tx.executeSql(
         `
-        
+        DELETE FROM customers where id = ?`,
+        [this.state.customerID],
+        (txObj, resultSet) => console.log("delete", this.state.customerID),
+
+        (txObj, error) => console.log("Error", error)
+      );
+    });
+    db.transaction((tx) => {
+      tx.executeSql(
+        `
         INSERT INTO customers
        (firstname,lastname,contact,
         shoulder, shirt_length,teerah,
@@ -140,7 +151,8 @@ class UpdateCustomer extends React.Component {
         (txObj, error) => console.log("Error", error)
       );
     });
-    this.props.navigation.navigate("Tabs");
+    this.props.navigation.navigate("Customer");
+    return;
   };
   handleIndexChange = (index) => {
     this.setState({
