@@ -15,6 +15,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import CustomerListItem from "./CustomerListItem";
 import Constants from "expo-constants";
 import { CustomerDataContext } from "../context/CustomerData";
+import { getData } from "../utils/lib";
 import * as SQLite from "expo-sqlite";
 const db = SQLite.openDatabase("db.testDb1"); // returns Database object
 
@@ -31,7 +32,7 @@ const CustomersList = ({ item, navigation }) => {
 
   useEffect(() => {
     fetchData();
-    console.log("initial state", customers);
+    console.log("calling get data", getData());
   }, []);
 
   // useEffect(() => {

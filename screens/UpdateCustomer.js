@@ -26,10 +26,14 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview"
 import SegmentedControlTab from "react-native-segmented-control-tab";
 import { AntDesign } from "@expo/vector-icons";
 import * as SQLite from "expo-sqlite";
+import { CustomerDataContext } from "../context/CustomerData";
 const db = SQLite.openDatabase("db.testDb1"); // returns Database object
 const statusBarHeight = Constants.statusBarHeight;
 
 class UpdateCustomer extends React.Component {
+  // const { customers, initCustomersList } = CustomerDataContext;
+  static contextType = CustomerDataContext;
+
   static navigationOptions = {
     title: "Update Customer",
   };
@@ -114,6 +118,7 @@ class UpdateCustomer extends React.Component {
         (txObj, error) => console.log("Error", error)
       );
     });
+
     db.transaction((tx) => {
       tx.executeSql(
         `
@@ -151,8 +156,28 @@ class UpdateCustomer extends React.Component {
         (txObj, error) => console.log("Error", error)
       );
     });
+
+    this.fetchData();
     this.props.navigation.navigate("Customer");
     return;
+  };
+
+  fetchData = () => {
+    let { initCustomersList } = this.context;
+
+    db.transaction((tx) => {
+      // sending 4 arguments in executeSql
+      tx.executeSql(
+        "SELECT * FROM customers",
+        null, // passing sql query and parameters:null
+        // success callback which sends two things Transaction object and ResultSet Object
+        (txObj, { rows: { _array } }) => {
+          initCustomersList(_array);
+        }
+        // failure callback which sends two things Transaction object and Error
+        // (txObj, error) => console.log('Error ', error)
+      ); // end executeSQL
+    }); // end transaction
   };
   handleIndexChange = (index) => {
     this.setState({
