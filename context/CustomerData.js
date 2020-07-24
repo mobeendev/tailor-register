@@ -5,13 +5,13 @@ const initialState = {
   customers: null,
 };
 
-export const CustomerDataContext = React.createContext(444);
+export const CustomerDataContext = React.createContext();
 
 export const CustomerDataProvider = ({ children }) => {
   const [state, dispatch] = useReducer(CustomerReducer, initialState);
 
   function initCustomersList(customers) {
-    console.log("passed data", customers);
+    // console.log("passed data", customers);
 
     dispatch({
       type: "SET_CUSTOMER",
@@ -19,9 +19,21 @@ export const CustomerDataProvider = ({ children }) => {
     });
   }
 
+  function updateCustomersList() {
+    console.log("updating...");
+
+    dispatch({
+      type: "EDIT_CUSTOMER",
+    });
+  }
+
   return (
     <CustomerDataContext.Provider
-      value={{ customers: state.customers, initCustomersList }}
+      value={{
+        customers: state.customers,
+        initCustomersList,
+        updateCustomersList,
+      }}
     >
       {children}
     </CustomerDataContext.Provider>
